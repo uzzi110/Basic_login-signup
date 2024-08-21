@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import image from '../images/login.png'
 import './login.css'
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,9 +21,9 @@ const Login = () => {
 
     setError('');
     
-    let data ={email, password, name}
-    localStorage.setItem("user", JSON.stringify(data));
-    console.log(data);
+    // let data ={email, password, name}
+    // localStorage.setItem("user", JSON.stringify(data));
+    // console.log(data);
 
     setEmail('');
     setPassword('');

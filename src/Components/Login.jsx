@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import image from '../images/login.png'
 import './login.css'
 import { useNavigate, Link } from'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!email || !password) {
@@ -18,14 +19,24 @@ const Login = () => {
 
     setError('');
 
-    let user = JSON.parse(localStorage.getItem('user'));
-    if (!user || user.email!==email || user.password!==password) {
+    // let user = JSON.parse(localStorage.getItem('user'));
+    // if (!user || user.email!==email || user.password!==password) {
+    //   setError('Invalid email or password');
+    //   return;
+    // }
+    // else{
+    //     alert('logged in successfully');
+    // }
+
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/users?email=${email}`);
+    console.log(response.data);
+  
+    if (response) {
+      alert('Login successful!');
+    } else {
       setError('Invalid email or password');
-      return;
     }
-    else{
-        alert('logged in successfully');
-    }
+     
 
   };
 
